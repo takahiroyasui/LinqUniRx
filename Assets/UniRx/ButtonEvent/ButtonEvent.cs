@@ -1,18 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UniRx;
+using UnityEngine.UI;
 
 public class ButtonEvent : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField] Button button;
+
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        button
+            .OnClickAsObservable()
+            .Subscribe(_ => Debug.Log("on click"));
     }
 }

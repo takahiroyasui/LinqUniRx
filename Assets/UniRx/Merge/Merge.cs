@@ -1,18 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UniRx;
 
 public class Merge : MonoBehaviour
 {
-    // Start is called before the first frame update
     void Start()
     {
-        
-    }
+        var list1 = new List<string> { "A1", "A2", "A3", "A4", "A5" }.ToObservable();
+        var list2 = new List<string> { "B1", "B2", "B3", "B4", "B5" }.ToObservable();
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        Observable
+            .Merge(list1, list2)
+            .Subscribe(x => Debug.Log(x));
     }
 }

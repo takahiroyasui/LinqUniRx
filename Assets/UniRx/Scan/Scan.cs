@@ -1,18 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UniRx;
 
 public class Scan : MonoBehaviour
 {
-    // Start is called before the first frame update
     void Start()
     {
-        
-    }
+        var list = new List<int> { 1, 2, 3, 4, 5 };
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        list.ToObservable()
+            .Scan((a, b) => a + b)
+            .Subscribe(x => Debug.Log(x));
+        // 1, 3, 6, 10, 15
     }
 }

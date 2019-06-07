@@ -1,18 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UniRx;
 
 public class Distinct : MonoBehaviour
 {
-    // Start is called before the first frame update
     void Start()
     {
-        
-    }
+        var list = new List<int> { 1, 2, 3, 3, 4, 5, 5 };
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        list.ToObservable()
+            .Distinct()
+            .Subscribe(x => Debug.Log(x));
     }
 }

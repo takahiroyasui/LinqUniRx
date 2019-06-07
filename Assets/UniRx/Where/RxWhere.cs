@@ -11,8 +11,6 @@ public class RxWhere : MonoBehaviour
 
         list.ToObservable()
             .Where(x => x > 2)
-            .Subscribe(x => {
-                Debug.Log(x);
-            });
+            .Subscribe(x => Debug.Log(x));
     }
 }
