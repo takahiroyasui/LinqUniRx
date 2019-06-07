@@ -29,7 +29,7 @@ public class SubscribeOn : MonoBehaviour
             observer.OnNext("OnClick button 2");
             observer.OnCompleted();
             return Disposable.Empty;
-        }).SubscribeOn(UniRx.Scheduler.ThreadPool);
+        }).SubscribeOn(Scheduler.ThreadPool);
 
         observable.Subscribe(x => Debug.Log(x));
     }
@@ -38,5 +38,17 @@ public class SubscribeOn : MonoBehaviour
     {
         button1.OnClickAsObservable().Subscribe(_ => onClick1());
         button2.OnClickAsObservable().Subscribe(_ => onClick2());
+
+
+        // Debug.Log("START");
+        // var observable = Observable.Create<int>(observer => {
+        //     Thread.Sleep(3000);
+        //     observer.OnNext(1);
+        //     observer.OnCompleted();
+        //     return Disposable.Empty;
+        // }).SubscribeOn(Scheduler.ThreadPool);
+
+        // observable.Subscribe(x => Debug.Log(x));
+        // Debug.Log("END");
     }
 }
