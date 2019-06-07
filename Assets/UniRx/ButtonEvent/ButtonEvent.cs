@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class ButtonEvent : MonoBehaviour
 {
-    [SerializeField] Button button;
+    [SerializeField] Button button = default;
 
     void Start()
     {

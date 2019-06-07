@@ -7,8 +7,8 @@ using System.Threading;
 
 public class SubscribeOn : MonoBehaviour
 {
-    [SerializeField] Button button1;
-    [SerializeField] Button button2;
+    [SerializeField] Button button1 = default;
+    [SerializeField] Button button2 = default;
 
     void onClick1()
     {
