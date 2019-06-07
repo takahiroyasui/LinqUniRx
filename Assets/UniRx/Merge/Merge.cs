@@ -2,13 +2,33 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
+using System.Threading;
 
 public class Merge : MonoBehaviour
 {
     void Start()
     {
-        var list1 = new List<string> { "A1", "A2", "A3", "A4", "A5" }.ToObservable();
-        var list2 = new List<string> { "B1", "B2", "B3", "B4", "B5" }.ToObservable();
+        var list1 = Observable.Create<string>(observer => {
+            Thread.Sleep(1);
+            observer.OnNext("A1");
+            Thread.Sleep(8);
+            observer.OnNext("A2");
+            Thread.Sleep(2);
+            observer.OnNext("A3");
+            observer.OnCompleted();
+            return Disposable.Empty;
+        }).SubscribeOn(Scheduler.ThreadPool);
+
+        var list2 = Observable.Create<string>(observer => {
+            Thread.Sleep(3);
+            observer.OnNext("B1");
+            Thread.Sleep(1);
+            observer.OnNext("B2");
+            Thread.Sleep(12);
+            observer.OnNext("B3");
+            observer.OnCompleted();
+            return Disposable.Empty;
+        }).SubscribeOn(Scheduler.ThreadPool);
 
         Observable
             .Merge(list1, list2)
